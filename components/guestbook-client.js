@@ -8,6 +8,7 @@ import { BUILDER_CODE, DATA_SUFFIX, MINI_APP_NAME } from '@/lib/miniapp';
 import { trackTransaction } from '@/utils/track';
 
 const MAX_LENGTH = 140;
+const USER_OPERATION_EVENT_TOPIC = '0x49628fd1471006c1482da88028e9ce4dbb080b815c9b0344d39e5a8e6ec1419f';
 
 function shortAddress(address) {
   if (!address) return '';
@@ -47,6 +48,7 @@ export default function GuestbookClient() {
   const [isHydrated, setIsHydrated] = useState(false);
   const [entries, setEntries] = useState([]);
   const [isEntriesLoading, setIsEntriesLoading] = useState(true);
+  const [userOperationHash, setUserOperationHash] = useState('');
 
   useEffect(() => {
     setIsHydrated(true);
@@ -121,6 +123,33 @@ export default function GuestbookClient() {
     refetchCount();
     setRefreshKey((current) => current + 1);
   }, [address, hash, isSuccess, refetchCount]);
+
+  useEffect(() => {
+    let ignore = false;
+
+    async function loadUserOperationHash() {
+      if (!isSuccess || !hash || !address) return;
+
+      const { publicClient } = await import('@/lib/public-client');
+      const receipt = await publicClient.getTransactionReceipt({ hash });
+      const normalizedSenderTopic = `0x${address.toLowerCase().replace('0x', '').padStart(64, '0')}`;
+      const userOperationLog = receipt.logs.find(
+        (log) =>
+          log.topics?.[0]?.toLowerCase() === USER_OPERATION_EVENT_TOPIC &&
+          log.topics?.[2]?.toLowerCase() === normalizedSenderTopic
+      );
+
+      if (!ignore) {
+        setUserOperationHash(userOperationLog?.topics?.[1] ?? '');
+      }
+    }
+
+    loadUserOperationHash();
+
+    return () => {
+      ignore = true;
+    };
+  }, [address, hash, isSuccess]);
 
   const remaining = MAX_LENGTH - message.length;
   const walletConnector = connectors.find((connector) => connector.id === 'coinbaseWalletSDK') ?? connectors[0];
@@ -208,14 +237,15 @@ export default function GuestbookClient() {
             type="button"
             className="primary-button primary-button--wide"
             disabled={!isConnected || !message.trim() || !transactionData || isPending || isConfirming}
-            onClick={() =>
+            onClick={() => {
+              setUserOperationHash('');
               sendTransaction({
                 to: guestbookAddress,
                 data: transactionData,
                 dataSuffix: DATA_SUFFIX,
                 value: 0n
-              })
-            }
+              });
+            }}
           >
             {isPending || isConfirming ? 'Submitting...' : 'Sign onchain'}
           </button>
@@ -226,6 +256,13 @@ export default function GuestbookClient() {
               <a href={`https://basescan.org/tx/${hash}`} target="_blank" rel="noreferrer">
                 {shortAddress(hash)}
               </a>
+            </p>
+          ) : null}
+
+          {userOperationHash ? (
+            <p className="status-line">
+              AA userOp hash:
+              <span> {userOperationHash}</span>
             </p>
           ) : null}
 
