@@ -1,8 +1,8 @@
 ﻿'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import { useAccount, useConnect, useDisconnect, useReadContract, useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
-import { formatEther } from 'viem';
+import { encodeFunctionData, formatEther } from 'viem';
+import { useAccount, useConnect, useDisconnect, useReadContract, useSendTransaction, useWaitForTransactionReceipt } from 'wagmi';
 import { guestbookAbi, guestbookAddress } from '@/lib/guestbook';
 import { BUILDER_CODE, DATA_SUFFIX, MINI_APP_NAME } from '@/lib/miniapp';
 import { trackTransaction } from '@/utils/track';
@@ -110,10 +110,8 @@ export default function GuestbookClient() {
     };
   }, [indexes]);
 
-  const { data: hash, isPending, writeContract, error } = useWriteContract();
-  const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({
-    hash
-  });
+  const { data: hash, isPending, sendTransaction, error } = useSendTransaction();
+  const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({ hash });
 
   useEffect(() => {
     if (!isSuccess || !hash || !address) return;
@@ -126,6 +124,13 @@ export default function GuestbookClient() {
 
   const remaining = MAX_LENGTH - message.length;
   const walletConnector = connectors.find((connector) => connector.id === 'coinbaseWalletSDK') ?? connectors[0];
+  const transactionData = message.trim()
+    ? encodeFunctionData({
+        abi: guestbookAbi,
+        functionName: 'sign',
+        args: [message.trim()]
+      })
+    : null;
 
   return (
     <main className="page-shell">
@@ -202,14 +207,13 @@ export default function GuestbookClient() {
           <button
             type="button"
             className="primary-button primary-button--wide"
-            disabled={!isConnected || !message.trim() || isPending || isConfirming}
+            disabled={!isConnected || !message.trim() || !transactionData || isPending || isConfirming}
             onClick={() =>
-              writeContract({
-                abi: guestbookAbi,
-                address: guestbookAddress,
-                functionName: 'sign',
-                args: [message.trim()],
-                dataSuffix: DATA_SUFFIX
+              sendTransaction({
+                to: guestbookAddress,
+                data: transactionData,
+                dataSuffix: DATA_SUFFIX,
+                value: 0n
               })
             }
           >
