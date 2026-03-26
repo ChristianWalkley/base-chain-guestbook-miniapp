@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@base-org/account": "^1.0.8",
     "@tanstack/react-query": "^5.66.9",
     "next": "^15.2.4",
     "react": "^19.0.0",
