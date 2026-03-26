@@ -1,5 +1,7 @@
 ﻿import { NextResponse } from 'next/server';
 
+const homeUrl = 'https://base-chain-guestbook.vercel.app';
+
 export async function GET() {
   return NextResponse.json({
     accountAssociation: {
@@ -10,13 +12,29 @@ export async function GET() {
     frame: {
       version: '1',
       name: 'Chain Guestbook',
-      iconUrl: 'https://base-chain-guestbook.vercel.app/icon.svg',
-      homeUrl: 'https://base-chain-guestbook.vercel.app',
-      imageUrl: 'https://base-chain-guestbook.vercel.app/og-image.svg',
+      iconUrl: `${homeUrl}/icon.svg`,
+      homeUrl,
+      imageUrl: `${homeUrl}/og-image.svg`,
       buttonTitle: 'Open Chain Guestbook',
-      splashImageUrl: 'https://base-chain-guestbook.vercel.app/hero-art.svg',
+      splashImageUrl: `${homeUrl}/hero-art.svg`,
       splashBackgroundColor: '#09111f',
-      webhookUrl: 'https://base-chain-guestbook.vercel.app/api/webhook'
+      webhookUrl: `${homeUrl}/api/webhook`
+    },
+    miniapp: {
+      version: '1',
+      name: 'Chain Guestbook',
+      description: 'Wallet addresses can leave one short message on Base for community interaction.',
+      iconUrl: `${homeUrl}/icon.svg`,
+      homeUrl,
+      imageUrl: `${homeUrl}/og-image.svg`,
+      buttonTitle: 'Open Chain Guestbook',
+      splashImageUrl: `${homeUrl}/hero-art.svg`,
+      splashBackgroundColor: '#09111f',
+      webhookUrl: `${homeUrl}/api/webhook`,
+      canonicalDomain: 'base-chain-guestbook.vercel.app',
+      requiredChains: ['eip155:8453'],
+      tags: ['base', 'guestbook', 'social'],
+      requiredCapabilities: ['actions.ready']
     }
   });
 }

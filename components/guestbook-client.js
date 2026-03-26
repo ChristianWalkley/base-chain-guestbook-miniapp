@@ -4,10 +4,10 @@ import { useEffect, useMemo, useState } from 'react';
 import { useAccount, useConnect, useDisconnect, useReadContract, useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
 import { formatEther } from 'viem';
 import { guestbookAbi, guestbookAddress } from '@/lib/guestbook';
+import { BUILDER_CODE, DATA_SUFFIX, MINI_APP_NAME } from '@/lib/miniapp';
 import { trackTransaction } from '@/utils/track';
 
 const MAX_LENGTH = 140;
-const APP_NAME = '\u94fe\u4e0a\u7559\u8a00\u677f';
 
 function shortAddress(address) {
   if (!address) return '';
@@ -118,7 +118,7 @@ export default function GuestbookClient() {
   useEffect(() => {
     if (!isSuccess || !hash || !address) return;
 
-    trackTransaction('app-326', APP_NAME, address, hash);
+    trackTransaction('app-326', MINI_APP_NAME, address, hash);
     setMessage('');
     refetchCount();
     setRefreshKey((current) => current + 1);
@@ -208,7 +208,8 @@ export default function GuestbookClient() {
                 abi: guestbookAbi,
                 address: guestbookAddress,
                 functionName: 'sign',
-                args: [message.trim()]
+                args: [message.trim()],
+                dataSuffix: DATA_SUFFIX
               })
             }
           >
@@ -232,6 +233,8 @@ export default function GuestbookClient() {
               {shortAddress(guestbookAddress)}
             </a>
           </div>
+
+          <p className="status-line">Builder code: {BUILDER_CODE}</p>
         </div>
 
         <div className="feed-card">
@@ -260,8 +263,8 @@ export default function GuestbookClient() {
           <strong>Built for community prompts, event check-ins, and moments worth preserving.</strong>
         </div>
         <div>
-          <span>Gas friendly</span>
-          <strong>{formatEther(1000000000000000n)} ETH scale interaction keeps it lightweight</strong>
+          <span>8021 attribution</span>
+          <strong>The guestbook transaction appends your verified builder suffix before submission.</strong>
         </div>
       </section>
     </main>
