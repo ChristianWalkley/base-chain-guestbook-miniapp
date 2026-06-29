@@ -102,3 +102,9 @@ npm run start
 ## Usage
 
 1. Open the app.
+2. Connect a wallet.
+3. Write a short guestbook message.
+4. Submit the message through the onchain write flow.
+5. View the latest guestbook notes in the feed.
+
+## Project Notes
