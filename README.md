@@ -70,3 +70,10 @@ npm run dev
 Open the local URL shown in your terminal to view the app.
 
 During development, you can edit the app UI, metadata, contract interaction flow, and supporting utility files as needed.
+
+## Build
+
+Create a production build:
+
+```bash
+npm run build
