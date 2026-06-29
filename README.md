@@ -40,3 +40,9 @@ Before running the project, make sure you have the following installed:
 Use the Node.js version expected by the project if one is specified in the repository configuration.
 
 ## Setup
+
+Clone the repository:
+
+```bash
+git clone https://github.com/ChristianWalkley/base-chain-guestbook-miniapp.git
+```
