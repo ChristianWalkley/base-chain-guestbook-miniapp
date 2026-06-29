@@ -58,3 +58,10 @@ Install dependencies:
 ```bash
 npm install
 ```
+
+## Development
+
+Start the local development server:
+
+```bash
+npm run dev
