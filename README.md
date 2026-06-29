@@ -96,3 +96,9 @@ This command is intended for serving the built app after a successful build.
 ```bash
 npm run dev
 npm run build
+npm run start
+```
+
+## Usage
+
+1. Open the app.
