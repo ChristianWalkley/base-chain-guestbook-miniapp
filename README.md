@@ -15,3 +15,10 @@ It is designed around a single, focused interaction: write a brief guestbook mes
 The app includes Base app metadata, a Talent verification meta tag, and transaction attribution tracking through `utils/track.js`.
 
 ## Features
+
+- Base mainnet guestbook contract integration
+- Wallet connection flow
+- Onchain message submission
+- Latest onchain notes feed
+- Base app metadata
+- Talent verification meta tag
