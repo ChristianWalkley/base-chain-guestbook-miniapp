@@ -35,3 +35,8 @@ The app includes Base app metadata, a Talent verification meta tag, and transact
 Before running the project, make sure you have the following installed:
 
 - Node.js
+- npm
+
+Use the Node.js version expected by the project if one is specified in the repository configuration.
+
+## Setup
