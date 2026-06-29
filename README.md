@@ -22,3 +22,9 @@ The app includes Base app metadata, a Talent verification meta tag, and transact
 - Latest onchain notes feed
 - Base app metadata
 - Talent verification meta tag
+- Transaction attribution tracking via `utils/track.js`
+
+## Contract
+
+- Address: `0xf41cf25dcc080f9af84cb4189215d0d9dc9232bf`
+- Type: `On-chain Social / Guestbook`
