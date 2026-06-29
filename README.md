@@ -82,3 +82,11 @@ npm run build
 Use this command before deploying or validating that the project builds successfully.
 
 ## Start
+
+Run the production server:
+
+```bash
+npm run start
+```
+
+This command is intended for serving the built app after a successful build.
