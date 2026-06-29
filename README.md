@@ -77,3 +77,8 @@ Create a production build:
 
 ```bash
 npm run build
+```
+
+Use this command before deploying or validating that the project builds successfully.
+
+## Start
