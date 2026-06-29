@@ -114,3 +114,9 @@ npm run start
 - The app displays recent onchain messages.
 - Transaction attribution tracking is handled in `utils/track.js`.
 - Base app metadata and Talent verification metadata are included.
+
+## Repository
+
+Source code is available at:
+
+https://github.com/ChristianWalkley/base-chain-guestbook-miniapp.git
