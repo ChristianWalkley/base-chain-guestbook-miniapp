@@ -9,3 +9,9 @@ Repository: https://github.com/ChristianWalkley/base-chain-guestbook-miniapp.git
 ## Overview
 
 Chain Guestbook is a lightweight onchain social mini app.
+
+It is designed around a single, focused interaction: write a brief guestbook message and make it available onchain. Recent notes are then shown in the app so visitors can see what others have shared.
+
+The app includes Base app metadata, a Talent verification meta tag, and transaction attribution tracking through `utils/track.js`.
+
+## Features
