@@ -65,3 +65,8 @@ Start the local development server:
 
 ```bash
 npm run dev
+```
+
+Open the local URL shown in your terminal to view the app.
+
+During development, you can edit the app UI, metadata, contract interaction flow, and supporting utility files as needed.
