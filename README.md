@@ -28,3 +28,10 @@ The app includes Base app metadata, a Talent verification meta tag, and transact
 
 - Address: `0xf41cf25dcc080f9af84cb4189215d0d9dc9232bf`
 - Type: `On-chain Social / Guestbook`
+- Network: Base mainnet
+
+## Prerequisites
+
+Before running the project, make sure you have the following installed:
+
+- Node.js
