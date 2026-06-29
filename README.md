@@ -46,3 +46,9 @@ Clone the repository:
 ```bash
 git clone https://github.com/ChristianWalkley/base-chain-guestbook-miniapp.git
 ```
+
+Move into the project directory:
+
+```bash
+cd base-chain-guestbook-miniapp
+```
