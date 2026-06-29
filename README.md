@@ -52,3 +52,9 @@ Move into the project directory:
 ```bash
 cd base-chain-guestbook-miniapp
 ```
+
+Install dependencies:
+
+```bash
+npm install
+```
