@@ -108,3 +108,9 @@ npm run start
 5. View the latest guestbook notes in the feed.
 
 ## Project Notes
+
+- Messages are written to a Base mainnet guestbook contract.
+- The guestbook is intended for short notes.
+- The app displays recent onchain messages.
+- Transaction attribution tracking is handled in `utils/track.js`.
+- Base app metadata and Talent verification metadata are included.
