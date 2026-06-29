@@ -90,3 +90,9 @@ npm run start
 ```
 
 This command is intended for serving the built app after a successful build.
+
+## Available Scripts
+
+```bash
+npm run dev
+npm run build
